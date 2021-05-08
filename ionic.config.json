@@ -1,0 +1,7 @@
+{
+  "name": "spk-iguana",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

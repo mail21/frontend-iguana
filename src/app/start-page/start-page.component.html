@@ -1,0 +1,34 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <table no-border style="width: 100%;">
+      <tr>
+        <td>
+          <ion-buttons slot="start" style="padding: 10px;">
+            <img src="../../assets/iguanah.png" height="70px" width="70px">
+          </ion-buttons>
+        </td>
+        <td>
+          <ion-title>Sistem Pakar Diagnosa<br>
+            Penyakit Hewan Iguana</ion-title>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+          <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+        </td>
+      </tr>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding [fullscreen]="true">
+  <div id="container">
+    <ion-button style="margin-top: 90px;" color="medium" (click)="login_admin()">Login Admin</ion-button>
+    <br>
+    <br>
+    <ion-button color="medium" (click)="login_user()">Login User</ion-button>
+    <br>
+    <br>
+    <ion-button color="medium" (click)="daftar_user()">Daftar User</ion-button>
+  </div>
+</ion-content>

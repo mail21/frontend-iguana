@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Tambah Gejala (Admin)</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">TEST</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-item>
+      <ion-label>Pilih Penyakit</ion-label>
+      <ion-select [(ngModel)]="id_penyakit" okText="OK" cancelText="Dismiss">
+        <ion-select-option *ngFor="let penyakits of penyakit" value="{{penyakits.id_penyakit}}">{{penyakits.nama_penyakit}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Deskripsi Gejala</ion-label>
+      <ion-textarea [(ngModel)]="gejala"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Deskripsi Kuesioner</ion-label>
+      <ion-textarea [(ngModel)]="kuesioner"></ion-textarea>
+    </ion-item>
+    <br>
+    <ion-button color="medium" (click)="insert_gejala()">SUBMIT</ion-button>
+  </div>
+</ion-content>

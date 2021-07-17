@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Detail Penyakit</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">TEST</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <br><br>
+    <h3>{{judul_penyakit}}</h3><br>
+    <img width="250px" height="250px" [src]="picImage" >
+    <br><b>Deskripsi</b><br>
+    <p>{{deskripsi_penyakit}}</p>
+    <br>
+    <b>Gejala</b><br>
+    <div *ngFor="let gejalas of gejala"><p>{{gejalas.desc_gejala}}</p></div>
+    <br>
+    <b>Saran Pengobatan</b><br>
+    <p>{{deskripsi_pengobatan}}</p>
+  </div>
+</ion-content>

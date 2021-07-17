@@ -4,11 +4,17 @@ ion-menu-button {
 
 #container {
   text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
+}
+
+#containergejala {
+  text-align: center;
+  position: relative;
+}
+
+#containerpenyakit {
+  text-align: center;
+  position: relative;
 }
 
 #container strong {
@@ -25,4 +31,8 @@ ion-menu-button {
 
 #container a {
   text-decoration: none;
+}
+
+ion-content.background{
+  --background: url(../../assets/green.png) 0 0/100% 100% no-repeat;
 }

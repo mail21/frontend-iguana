@@ -1,13 +1,59 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>{{ folder }} </ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header no-border>
+  <ion-toolbar>
+    <table no-border style="width: 100%">
+      <tr>
+        <td>
+          <ion-buttons slot="start" style="padding: 10px">
+            <ion-menu-button color="medium"></ion-menu-button>
+            <img src="../../assets/iguanah.png" height="70px" width="70px" />
+          </ion-buttons>
+        </td>
+        <td>
+          <ion-title
+            >Sistem Pakar Diagnosa<br />
+            Penyakit Hewan Iguana</ion-title
+          >
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <hr
+            style="
+              height: 3px;
+              border-width: 0;
+              color: gray;
+              background-color: gray;
+            "
+          />
+          <hr
+            style="
+              height: 3px;
+              border-width: 0;
+              color: gray;
+              background-color: gray;
+            "
+          />
+        </td>
+      </tr>
+    </table>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content
+  padding
+  [fullscreen]="true"
+  class="background"
+  *ngIf="folder == 'Home'"
+>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">{{ folder }}</ion-title>
@@ -15,7 +61,203 @@
   </ion-header>
 
   <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-grid>
+      <!-- <ion-row>
+        <ion-col>
+          <ion-card>
+            <ion-card-header>
+              <ion-card-subtitle>Selamat Datang</ion-card-subtitle>
+              <ion-card-title>Sistem Pakar Deteksi Penyakit Pada Reptil Iguana</ion-card-title>
+            </ion-card-header>
+          
+            <ion-card-content>
+              <br>
+              <img width="200px" height="120px" src="../../assets/lizard.png">
+              <br>
+              Silahkan Pilih Menu Daftar Kuesioner Untuk Mengisi Kuesioner Gejala Penyakit Apa Saja Yang Dialami Reptil Iguana Anda, Kami Akan Menampilkan Hasilnya disini
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row> -->
+      <ion-row *ngIf="status == 'user'">
+        <ion-col>
+          <div style="padding: 10px" (click)='toMenu("Daftar Penyakit")'>
+            <img src="../../assets/search.png" height="70px" width="70px" />
+            <br /><b style="color: white">Daftar Penyakit</b>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div style="padding: 10px" (click)='toMenu2("kuesioner")'>
+            <img src="../../assets/clipboard.png" height="70px" width="70px" />
+            <br /><b style="color: white">Konsultasi</b>
+          </div>
+        </ion-col>
+        <!-- <ion-col>
+          <ion-card (click)='toMenu("Daftar Gejala")'>
+            <ion-card-content>
+              <ion-icon size="large" name="book"></ion-icon><br>
+              Daftar Gejala
+            </ion-card-content>
+          </ion-card>
+        </ion-col> -->
+      </ion-row>
+      <ion-row *ngIf="status == 'user'">
+        <ion-col>
+          <div style="padding: 10px" (click)='toMenu("Bantuan")'>
+            <img src="../../assets/help.png" height="70px" width="70px" />
+            <br /><b style="color: white">Bantuan</b>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div style="padding: 10px" (click)='toMenu("About")'>
+            <img src="../../assets/about.png" height="70px" width="70px" />
+            <br /><b style="color: white">Tentang Aplikasi</b>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="status == 'admin'">
+        <ion-col>
+          <ion-button color="medium" (click)='toMenu("Daftar Penyakit")'>
+            Daftar Penyakit
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="status == 'admin'">
+        <ion-col>
+          <ion-button color="medium" (click)='toMenu("Daftar Gejala")'>
+            Daftar Gejala
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<ion-content padding [fullscreen]="true" *ngIf="folder == 'Daftar Penyakit'">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="containerpenyakit">
+    <ion-button
+      *ngIf="status == 'admin'"
+      color="medium"
+      style="margin-top: 20px"
+      (click)="addpenyakit()"
+      >Add Penyakit</ion-button
+    >
+    <div>
+      <ion-item *ngFor="let penyakits of penyakit">
+        <ion-label (click)="detail_penyakit(penyakits.id_penyakit)"
+          >{{ penyakits.nama_penyakit }}</ion-label
+        >
+        <ion-button
+          *ngIf="status == 'admin'"
+          color="medium"
+          (click)="editpenyakit(penyakits.id_penyakit)"
+        >
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-button>
+        <ion-button
+          *ngIf="status == 'admin'"
+          color="medium"
+          (click)="deletepenyakit(penyakits.id_penyakit)"
+        >
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+  </div>
+</ion-content>
+
+<ion-content padding [fullscreen]="true" *ngIf="folder == 'Daftar Gejala'">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="containergejala">
+    <ion-button color="medium" style="margin-top: 20px" (click)="addgejala()"
+      >Add Gejala</ion-button
+    >
+    <ion-card *ngFor="let gejalas of gejala" style="margin-bottom: 10px">
+      <ion-card-content>
+        <table border="0">
+          <tr>
+            <td style="width: 95%">
+              <ion-card-title
+                >Penyakit : {{ gejalas.nama_penyakit }}</ion-card-title
+              >
+            </td>
+            <td style="width: 5%">
+              <ion-button
+                color="medium"
+                icon-only
+                item-end
+                clear
+                (click)="deletegejala(gejalas.id_gejala)"
+              >
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 95%">{{ gejalas.desc_gejala }}</td>
+            <td style="width: 5%">
+              <ion-button
+                color="medium"
+                icon-only
+                item-end
+                clear
+                (click)="editgejala(gejalas.id_gejala)"
+              >
+                <ion-icon name="pencil-outline"></ion-icon>
+              </ion-button>
+            </td>
+          </tr>
+        </table>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
+<ion-content padding [fullscreen]="true" *ngIf="folder == 'Kuesioner Gejala'">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container"></div>
+</ion-content>
+
+<ion-content padding [fullscreen]="true" *ngIf="folder == 'About'">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <br /><br /><br />
+    <b>Aplikasi Ini Di Buat Oleh Fajri Mardiana</b><br />
+    <img src="../../assets/unpam.png" height="70px" width="70px" />
+  </div>
+</ion-content>
+
+<ion-content padding [fullscreen]="true" *ngIf="folder == 'Bantuan'">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <br /><br /><br />
+    <b>Coba Sendiri</b><br />
+    <img src="../../assets/about.png" height="70px" width="70px" />
   </div>
 </ion-content>

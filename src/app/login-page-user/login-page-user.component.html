@@ -1,0 +1,45 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <table no-border style="width: 100%;">
+      <tr>
+        <td>
+          <ion-buttons slot="start" style="padding: 10px;">
+            <img src="../../assets/iguanah.png" height="70px" width="70px">
+          </ion-buttons>
+        </td>
+        <td>
+          <ion-title>Sistem Pakar Diagnosa<br>
+            Penyakit Hewan Iguana</ion-title>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+          <hr style="height:3px;border-width:0;color:gray;background-color:gray">
+        </td>
+      </tr>
+    </table>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding [fullscreen]="true">
+<body>
+  <div class="login-page">
+    <div class="form">
+      <form class="register-form">
+        <input type="text" placeholder="name"/>
+        <input type="password" placeholder="password"/>
+        <input type="text" placeholder="email address"/>
+        <button>create</button>
+        <!-- <p class="message">Already registered? <a href="#">Sign In</a></p> -->
+      </form>
+        <h3>Login User</h3>
+        <br>
+        <input type="text" placeholder="username" [(ngModel)]="username" value="{{username}}"/>
+        <input type="password" placeholder="password" [(ngModel)]="password" value="{{password}}"/>
+        <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
+      
+      <button (click)="login()">login</button>
+    </div>
+  </div>
+</body>
+</ion-content>
